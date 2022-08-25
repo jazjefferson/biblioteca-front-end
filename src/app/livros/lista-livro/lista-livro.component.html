@@ -1,4 +1,46 @@
-<p>lista-livro works!</p>
-<a routerLink="/livros/formulario">Cadastra livro</a>
-<br />
-<a routerLink="/livros/formulario/1">Alterar livro</a>
+<div class="text-center mt-2 mb-2 bg bg-secondary text-light">
+    <h1>Lista de livros</h1>
+</div>
+
+<a routerLink="/livros/formulario" class="btn btn-primary">Cadastrar</a>
+<div>
+    <table class="table mt-3">
+        <thead>
+            <th>Título</th>
+            <th>Ano de Lançamento</th>
+            <th>Autores</th>
+            <th>Ações</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Livro 1</td>
+                <td>2000</td>
+                <td>
+                    <div>Autor 1</div>
+                    <div>Autor 3</div>
+                </td>
+                <td><a routerLink="/livros/formulario/1" class="btn btn-warning">Alterar</a></td>
+            </tr>
+            <tr>
+                <td>Livro 2</td>
+                <td>2010</td>
+                <td>
+                    <div>Autor 2</div>
+                </td>
+                <td><a routerLink="/livros/formulario/2" class="btn btn-warning">Alterar</a></td>
+            </tr>
+            <tr>
+                <td>Livro 3</td>
+                <td>2020</td>
+                <td>
+                    <div>Autor 1</div>
+                    <div>Autor 2</div>
+                    <div>Autor 3</div>
+                </td>
+                <td><a routerLink="/livros/formulario/3" class="btn btn-warning">Alterar</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

@@ -1,2 +1,19 @@
-<p *ngIf="!id">Cadastrando novo autor</p>
-<p *ngIf="id">Alterando autor</p>
+<div class="text-center mt-2 mb-2 bg bg-secondary text-light">
+    <h1 *ngIf="!id">Cadastrar autor</h1>
+    <h1 *ngIf="id">Alterar autor</h1>
+</div>
+
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="nome" placeholder="Bernardo Da Silva">
+    <label for="nome">Nome</label>
+</div>
+<div class="form-floating">
+    <textarea rows="10" class="form-control" id="biografia" placeholder="O bernardo nasceu a muito tempo atrás."></textarea>
+    <label for="biografia">Biografia</label>
+</div>
+<div class="form-floating mt-2">
+    <button *ngIf="!id" type="button" class="btn btn-success">Cadastrar</button>
+    <button *ngIf="id" type="button" class="btn btn-success">Alterar</button>
+    <button type="button" class="btn btn-secondary ms-2" routerLink="/autores">Cancelar</button>
+</div>
+
