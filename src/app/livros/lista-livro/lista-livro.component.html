@@ -12,35 +12,36 @@
             <th>Ações</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Livro 1</td>
-                <td>2000</td>
+            <tr *ngFor="let livro of livros">
+                <td>{{livro.id}}</td>
+                <td>{{livro.anoLancamento}}</td>
+                <td></td>
                 <td>
-                    <div>Autor 1</div>
-                    <div>Autor 3</div>
+                    <a routerLink="/livros/formulario/{{livro.id}}" class="btn btn-warning">Alterar</a>
+                    <a (click)="abreModalParaExclusao(livro)" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#modal-remover-livro">
+                        Remover
+                    </a>
                 </td>
-                <td><a routerLink="/livros/formulario/1" class="btn btn-warning">Alterar</a></td>
-            </tr>
-            <tr>
-                <td>Livro 2</td>
-                <td>2010</td>
-                <td>
-                    <div>Autor 2</div>
-                </td>
-                <td><a routerLink="/livros/formulario/2" class="btn btn-warning">Alterar</a></td>
-            </tr>
-            <tr>
-                <td>Livro 3</td>
-                <td>2020</td>
-                <td>
-                    <div>Autor 1</div>
-                    <div>Autor 2</div>
-                    <div>Autor 3</div>
-                </td>
-                <td><a routerLink="/livros/formulario/3" class="btn btn-warning">Alterar</a></td>
             </tr>
         </tbody>
     </table>
 </div>
 
 
+<div class="modal" tabindex="-1" id="modal-remover-livro">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Remoção de Livro</h5>
+                <button id="modal-remover-livro-botao-fechar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja remover o livro <strong>{{nomeLivroParaExclusao}}</strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="removeLivro()">Remover</button>
+            </div>
+        </div>
+    </div>
+</div>
