@@ -19,7 +19,7 @@ export class FormularioLivroComponent implements OnInit {
     this.livroFormGroup = this.formBuilder.group({
       titulo: ['', Validators.required],
       anoLancamento: ['', Validators.required],
-      autoresIds: ['', Validators.required]
+      autoresIds: [null, Validators.required]
     });
   }
 
