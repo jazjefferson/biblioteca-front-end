@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,9 +11,16 @@ export class FormularioLivroComponent implements OnInit {
 
   id: number | null;
 
-  constructor(private activateRoute: ActivatedRoute) { 
+  livroFormGroup: FormGroup;
+
+  constructor(private activateRoute: ActivatedRoute, private formBuilder: FormBuilder) { 
     this.id = this.activateRoute.snapshot.paramMap.get("id") as number | null;
-    console.log(this.id);
+    
+    this.livroFormGroup = this.formBuilder.group({
+      titulo: ['', Validators.required],
+      anoLancamento: ['', Validators.required],
+      autoresIds: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {

@@ -2,18 +2,21 @@
     <h1 *ngIf="!id">Cadastrar autor</h1>
     <h1 *ngIf="id">Alterar autor</h1>
 </div>
-
-<div class="form-floating mb-3">
-    <input type="text" class="form-control" id="nome" placeholder="Bernardo Da Silva">
-    <label for="nome">Nome</label>
-</div>
-<div class="form-floating">
-    <textarea rows="10" class="form-control" id="biografia" placeholder="O bernardo nasceu a muito tempo atrás."></textarea>
-    <label for="biografia">Biografia</label>
-</div>
-<div class="form-floating mt-2">
-    <button *ngIf="!id" type="button" class="btn btn-success">Cadastrar</button>
-    <button *ngIf="id" type="button" class="btn btn-success">Alterar</button>
-    <button type="button" class="btn btn-secondary ms-2" routerLink="/autores">Cancelar</button>
-</div>
+<form [formGroup]="autorFormGroup">
+    <div class="form-floating mb-3">
+        <input formControlName="nome" type="text" class="form-control" id="nome" placeholder="Bernardo Da Silva">
+        <div *ngIf="autorFormGroup.get('nome')?.errors?.['required']" class="text-danger">O nome é obrigatório!</div>
+        <label for="nome">Nome</label>
+    </div>
+    <div class="form-floating">
+        <textarea formControlName="biografia" rows="10" class="form-control" id="biografia" placeholder="O bernardo nasceu a muito tempo atrás."></textarea>
+        <div *ngIf="autorFormGroup.get('biografia')?.errors?.['required']" class="text-danger">A biografia é obrigatória!</div>
+        <label for="biografia">Biografia</label>
+    </div>
+    <div class="form-floating mt-2">
+        <button *ngIf="!id" type="button" class="btn btn-success" [disabled]="autorFormGroup.invalid">Cadastrar</button>
+        <button *ngIf="id" type="button" class="btn btn-success">Alterar</button>
+        <button type="button" class="btn btn-secondary ms-2" routerLink="/autores">Cancelar</button>
+    </div>
+</form>
 

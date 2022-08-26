@@ -3,24 +3,29 @@
     <h1 *ngIf="id">Alterar livro</h1>
 </div>
 
-<div class="form-floating mb-3">
-    <input type="text" class="form-control" id="titulo" placeholder="História sem fim">
-    <label for="titulo">Título</label>
-</div>
-<div class="form-floating mb-3">
-    <input type="text" class="form-control" id="anoLancamento" placeholder="2000">
-    <label for="anoLancamento">Ano de Lançamento</label>
-</div>
-<select class="form-select" id="autoresIds" multiple="multiple" size="10">
-    <option value="0" disabled="disabled">Selecione os autores</option>
-    <option value="1">Autor 1</option>
-    <option value="2">Autor 2</option>
-    <option value="3">Autor 3</option>
-    <option value="4">Autor 4</option>
-    <option value="5">Autor 5</option>
-</select>
-<div class="form-floating mt-2">
-    <button *ngIf="!id" type="button" class="btn btn-success">Cadastrar</button>
-    <button *ngIf="id" type="button" class="btn btn-success">Alterar</button>
-    <button type="button" class="btn btn-secondary ms-2" routerLink="/livros">Cancelar</button>
-</div>
+<form [formGroup]="livroFormGroup">
+    <div class="form-floating mb-3">
+        <input formControlName="titulo" type="text" class="form-control" id="titulo" placeholder="História sem fim">
+        <div *ngIf="livroFormGroup.get('nome')?.errors?.['required']" class="text-danger">O Título é obrigatório!</div>
+        <label for="titulo">Título</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input formControlName="anoLancamento" type="text" class="form-control" id="anoLancamento" placeholder="2000">
+        <div *ngIf="livroFormGroup.get('anoLancamento')?.errors?.['required']" class="text-danger">O Ano de Lançamento é obrigatório!</div>
+        <label for="anoLancamento">Ano de Lançamento</label>
+    </div>
+    <select formArrayName="autoresIds" class="form-select" id="autoresIds" multiple="multiple" size="10">
+        <option value="0" disabled="disabled">Selecione os autores</option>
+        <option value="1">Autor 1</option>
+        <option value="2">Autor 2</option>
+        <option value="3">Autor 3</option>
+        <option value="4">Autor 4</option>
+        <option value="5">Autor 5</option>
+    </select>
+    <div *ngIf="livroFormGroup.get('autoresIds')?.errors?.['required']" class="text-danger">Ao menos um autor é obriga!</div>
+    <div class="form-floating mt-2">
+        <button *ngIf="!id" [disabled]="livroFormGroup.invalid" type="button" class="btn btn-success">Cadastrar</button>
+        <button *ngIf="id" type="button" class="btn btn-success">Alterar</button>
+        <button type="button" class="btn btn-secondary ms-2" routerLink="/livros">Cancelar</button>
+    </div>
+</form>

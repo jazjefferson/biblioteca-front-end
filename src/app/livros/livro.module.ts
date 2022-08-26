@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ListaLivroComponent } from './lista-livro/lista-livro.component';
 import { FormularioLivroComponent } from './formulario-livro/formulario-livro.component';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class LivroModule { }
