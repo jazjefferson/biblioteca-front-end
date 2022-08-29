@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AutorInput } from 'src/app/dtos/inputs/AutorInput';
 import { AutorService } from '../autor.service';
 
@@ -38,9 +38,11 @@ export class FormularioAutorComponent implements OnInit {
   cadastrar(){
     this.erroAoCadastrar = '';
     let autorInput = this.autorFormGroup.getRawValue() as AutorInput;
+
     this.autorService.cadastra(autorInput).subscribe(
       data =>{
-        this.router.navigate(["autores"])
+        const navigationExtras: NavigationExtras = {state: {successData: `Autor ${data.nome} cadastrado com sucesso!`}}
+        this.router.navigate(["autores"], navigationExtras)
       },
       error =>{
         this.erroAoCadastrar = error.error.message

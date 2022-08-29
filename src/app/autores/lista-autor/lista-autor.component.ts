@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AutorOutput } from 'src/app/dtos/outputs/AutorOutput';
 import { AutorService } from '../autor.service';
 
@@ -11,23 +12,29 @@ export class ListaAutorComponent implements OnInit {
 
   erroNaRequisicao: string = '';
   mensagemSemUsuarioCadastro: string = '';
+  autorCadastradoComSucesso: string = '';
   autores: AutorOutput[] = [];
-  constructor(private autorService: AutorService) { }
+  constructor(private autorService: AutorService, private router: Router) {
+    const currentNavigation = router.getCurrentNavigation();
+    if (currentNavigation?.extras?.state?.['successData']) {
+      this.autorCadastradoComSucesso = currentNavigation?.extras?.state?.['successData'];
+    }
+  }
 
   ngOnInit(): void {
     this.buscaTodos();
   }
 
-  buscaTodos(){
+  buscaTodos() {
     this.autorService.buscaTodos().subscribe(
-      data =>{
-        if(data.length>0){
+      data => {
+        if (data.length > 0) {
           this.autores = data;
-        }else{
+        } else {
           this.mensagemSemUsuarioCadastro = 'Não foram encontrados usuários';
         }
       },
-      error =>{
+      error => {
         this.erroNaRequisicao = "Ocorreu um erro na requisição";
         console.log(this.erroNaRequisicao)
       }
