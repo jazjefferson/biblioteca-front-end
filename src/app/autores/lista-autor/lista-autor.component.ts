@@ -35,7 +35,11 @@ export class ListaAutorComponent implements OnInit {
         }
       },
       error => {
-        this.erroNaRequisicao = "Ocorreu um erro na requisição";
+        if(error?.error?.message){
+          this.erroNaRequisicao = error.error.message;
+        }else{
+          this.erroNaRequisicao = "Ocorreu um erro inesperado. Tem mais tarde, por favor!"
+        }
         console.log(this.erroNaRequisicao)
       }
     );

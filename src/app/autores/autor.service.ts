@@ -18,7 +18,15 @@ export class AutorService {
     return this.httpClient.get<AutorOutput[]>(URL_API);
   }
 
+  buscaPeloId(id: number): Observable<AutorOutput> {
+    return this.httpClient.get<AutorOutput>(URL_API + "/" + id);
+  }
+
   cadastra(autorInput: AutorInput): Observable<AutorOutput> {
     return this.httpClient.post<AutorOutput>(URL_API, autorInput);
+  }
+
+  altera(id: number, autorInput: AutorInput): Observable<AutorOutput> {
+    return this.httpClient.put<AutorOutput>(URL_API + "/" + id, autorInput);
   }
 }

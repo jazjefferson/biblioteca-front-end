@@ -16,7 +16,7 @@
     <div *ngIf="erroAoCadastrar != ''" class="alert alert-danger mt-2">{{erroAoCadastrar}}</div>
     <div class="form-floating mt-2">
         <button *ngIf="!id" type="button" class="btn btn-success" [disabled]="autorFormGroup.invalid" (click)="cadastrar()">Cadastrar</button>
-        <button *ngIf="id" type="button" class="btn btn-success">Alterar</button>
+        <button *ngIf="id" type="button" class="btn btn-success" [disabled]="autorFormGroup.invalid" (click)="alterar()">Alterar</button>
         <button type="button" class="btn btn-secondary ms-2" routerLink="/autores">Cancelar</button>
     </div>
 </form>
