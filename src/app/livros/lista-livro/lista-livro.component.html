@@ -1,9 +1,14 @@
 <div class="text-center mt-2 mb-2 bg bg-secondary text-light">
     <h1>Lista de livros</h1>
 </div>
-
 <a routerLink="/livros/formulario" class="btn btn-primary">Cadastrar</a>
-<div>
+
+<div *ngIf="erroNaRequisicao != ''" class="alert alert-danger mt-3">{{erroNaRequisicao}}</div>
+<div *ngIf="mensagemSemLivroCadastrado != ''" class="alert alert-info mt-3">{{mensagemSemLivroCadastrado}}</div>
+<div *ngIf="livroCadastradoComSucesso != ''" class="alert alert-success mt-3">{{livroCadastradoComSucesso}}</div>
+
+
+<div *ngIf="mensagemSemLivroCadastrado == '' && erroNaRequisicao == ''">
     <table class="table mt-3">
         <thead>
             <th>Título</th>
@@ -18,7 +23,8 @@
                 <td></td>
                 <td>
                     <a routerLink="/livros/formulario/{{livro.id}}" class="btn btn-warning">Alterar</a>
-                    <a (click)="abreModalParaExclusao(livro)" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#modal-remover-livro">
+                    <a (click)="abreModalParaExclusao(livro)" class="btn btn-danger ms-2" data-bs-toggle="modal"
+                        data-bs-target="#modal-remover-livro">
                         Remover
                     </a>
                 </td>
@@ -33,7 +39,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Remoção de Livro</h5>
-                <button id="modal-remover-livro-botao-fechar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button id="modal-remover-livro-botao-fechar" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>Deseja remover o livro <strong>{{nomeLivroParaExclusao}}</strong>?</p>

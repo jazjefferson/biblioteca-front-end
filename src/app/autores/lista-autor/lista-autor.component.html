@@ -5,10 +5,10 @@
 <a routerLink="/autores/formulario" class="btn btn-primary">Cadastrar</a>
 
 <div *ngIf="erroNaRequisicao != ''" class="alert alert-danger mt-3">{{erroNaRequisicao}}</div>
-<div *ngIf="mensagemSemUsuarioCadastro != ''" class="alert alert-info mt-3">{{mensagemSemUsuarioCadastro}}</div>
+<div *ngIf="mensagemSemAutorCadastrado != ''" class="alert alert-info mt-3">{{mensagemSemAutorCadastrado}}</div>
 <div *ngIf="autorCadastradoComSucesso != ''" class="alert alert-success mt-3">{{autorCadastradoComSucesso}}</div>
 
-<div *ngIf="erroNaRequisicao == '' && mensagemSemUsuarioCadastro == ''">
+<div *ngIf="erroNaRequisicao == '' && mensagemSemAutorCadastrado == ''">
     <table class="table mt-3">
         <thead>
             <th>Nome</th>

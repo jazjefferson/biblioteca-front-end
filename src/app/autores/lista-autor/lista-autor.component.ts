@@ -11,7 +11,7 @@ import { AutorService } from '../autor.service';
 export class ListaAutorComponent implements OnInit {
 
   erroNaRequisicao: string = '';
-  mensagemSemUsuarioCadastro: string = '';
+  mensagemSemAutorCadastrado: string = '';
   autorCadastradoComSucesso: string = '';
   autores: AutorOutput[] = [];
   constructor(private autorService: AutorService, private router: Router) {
@@ -31,7 +31,7 @@ export class ListaAutorComponent implements OnInit {
         if (data.length > 0) {
           this.autores = data;
         } else {
-          this.mensagemSemUsuarioCadastro = 'Não foram encontrados usuários';
+          this.mensagemSemAutorCadastrado = 'Não foram encontrados autores';
         }
       },
       error => {
