@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LivroOutput } from 'src/app/dtos/outputs/LivroOutput';
 import { LivroService } from '../livro.service';
 
@@ -13,11 +14,16 @@ export class ListaLivroComponent implements OnInit {
   livroParaExclusao?: LivroOutput;
   erroNaRequisicao: string = '';
   mensagemSemLivroCadastrado: string ='';
-  livroCadastradoComSucesso: string = '';
+  mensagemSucesso: string = '';
 
   livros: LivroOutput[] = []
 
-  constructor(private livroService: LivroService) { }
+  constructor(private livroService: LivroService, private router: Router) {
+    const currentNavigation = router.getCurrentNavigation();
+    if (currentNavigation?.extras?.state?.['successData']) {
+      this.mensagemSucesso = currentNavigation?.extras?.state?.['successData'];
+    }
+   }
 
   ngOnInit(): void {
     this.buscaTodos();
@@ -49,9 +55,24 @@ export class ListaLivroComponent implements OnInit {
   }
 
   removeLivro(){
-    console.log(`vou remover o livro ${this.livroParaExclusao?.titulo} com id: ${this.livroParaExclusao?.id}`)
-    //fazer o processamento e der erro ou sucesso vamos fechar o modal.
-    document.getElementById("modal-remover-livro-botao-fechar")?.click();
+    this.mensagemSucesso = '';
+    if(!this.livroParaExclusao?.id){
+      return
+    }
+    this.livroService.remove(this.livroParaExclusao.id).subscribe(
+      data => {
+        document.getElementById("modal-remover-livro-botao-fechar")?.click();
+        this.mensagemSucesso = `O livro ${this.livroParaExclusao?.titulo} foi excluído com sucesso`;
+        this.buscaTodos();
+      },
+      error=>{
+        if(error?.error?.message){
+          this.erroNaRequisicao = error.error.message;
+        }else{
+          this.erroNaRequisicao = "Ocorreu um erro inesperado. Tem mais tarde, por favor!"
+        }
+      }
+    );
   }
 
 }

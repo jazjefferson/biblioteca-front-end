@@ -3,7 +3,9 @@
     <h1 *ngIf="id">Alterar livro</h1>
 </div>
 
-<form [formGroup]="livroFormGroup">
+<div *ngIf="mensagemSemAutorCadastrado != ''" class="alert alert-info mt-3">{{mensagemSemAutorCadastrado}}</div>
+
+<form [formGroup]="livroFormGroup" *ngIf="mensagemSemAutorCadastrado == ''">
     <div class="form-floating mb-3">
         <input formControlName="titulo" type="text" class="form-control" id="titulo" placeholder="História sem fim">
         <div *ngIf="livroFormGroup.get('titulo')?.errors?.['required']" class="text-danger">O Título é obrigatório!</div>
@@ -16,16 +18,13 @@
     </div>
     <select formControlName="autoresIds" class="form-select" id="autoresIds" multiple="multiple" size="10">
         <option value="0" disabled="disabled">Selecione os autores</option>
-        <option value="1">Autor 1</option>
-        <option value="2">Autor 2</option>
-        <option value="3">Autor 3</option>
-        <option value="4">Autor 4</option>
-        <option value="5">Autor 5</option>
+        <option *ngFor="let autor of autores" value="{{autor.id}}">{{autor.nome}}</option>
     </select>
     <div *ngIf="livroFormGroup.get('autoresIds')?.errors?.['required']" class="text-danger">Ao menos um autor é obriga!</div>
+    <div *ngIf="erroNaRequisicao != ''" class="alert alert-danger mt-3">{{erroNaRequisicao}}</div>
     <div class="form-floating mt-2">
-        <button *ngIf="!id" [disabled]="livroFormGroup.invalid" type="button" class="btn btn-success">Cadastrar</button>
-        <button *ngIf="id" type="button" class="btn btn-success">Alterar</button>
+        <button *ngIf="!id" (click)="cadastrar()" [disabled]="livroFormGroup.invalid" type="button" class="btn btn-success">Cadastrar</button>
+        <button *ngIf="id" (click)="alterar()" [disabled]="livroFormGroup.invalid" type="button" class="btn btn-success">Alterar</button>
         <button type="button" class="btn btn-secondary ms-2" routerLink="/livros">Cancelar</button>
     </div>
 </form>

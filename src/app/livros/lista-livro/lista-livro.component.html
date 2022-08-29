@@ -5,7 +5,7 @@
 
 <div *ngIf="erroNaRequisicao != ''" class="alert alert-danger mt-3">{{erroNaRequisicao}}</div>
 <div *ngIf="mensagemSemLivroCadastrado != ''" class="alert alert-info mt-3">{{mensagemSemLivroCadastrado}}</div>
-<div *ngIf="livroCadastradoComSucesso != ''" class="alert alert-success mt-3">{{livroCadastradoComSucesso}}</div>
+<div *ngIf="mensagemSucesso != ''" class="alert alert-success mt-3">{{mensagemSucesso}}</div>
 
 
 <div *ngIf="mensagemSemLivroCadastrado == '' && erroNaRequisicao == ''">
@@ -18,9 +18,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let livro of livros">
-                <td>{{livro.id}}</td>
+                <td>{{livro.titulo}}</td>
                 <td>{{livro.anoLancamento}}</td>
-                <td></td>
+                <td>
+                    <div *ngFor="let autor of livro.autores">{{autor.nome}}</div>
+                </td>
                 <td>
                     <a routerLink="/livros/formulario/{{livro.id}}" class="btn btn-warning">Alterar</a>
                     <a (click)="abreModalParaExclusao(livro)" class="btn btn-danger ms-2" data-bs-toggle="modal"
