@@ -3,7 +3,11 @@
 </div>
 
 <a routerLink="/autores/formulario" class="btn btn-primary">Cadastrar</a>
-<div>
+
+<div *ngIf="erroNaRequisicao != ''" class="alert alert-danger mt-3">{{erroNaRequisicao}}</div>
+<div *ngIf="mensagemSemUsuarioCadastro != ''" class="alert alert-info mt-3">{{mensagemSemUsuarioCadastro}}</div>
+
+<div *ngIf="erroNaRequisicao == '' && mensagemSemUsuarioCadastro == ''">
     <table class="table mt-3">
         <thead>
             <th>Nome</th>
@@ -11,23 +15,11 @@
             <th>Ações</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Autor 1</td>
-                <td>Biografia 1</td>
-                <td><a routerLink="/autores/formulario/1" class="btn btn-warning">Alterar</a></td>
-            </tr>
-            <tr>
-                <td>Autor 2</td>
-                <td>Biografia 2</td>
-                <td><a routerLink="/autores/formulario/2" class="btn btn-warning">Alterar</a></td>
-            </tr>
-            <tr>
-                <td>Autor 3</td>
-                <td>Biografia 3</td>
-                <td><a routerLink="/autores/formulario/3" class="btn btn-warning">Alterar</a></td>
+            <tr *ngFor="let autor of autores">
+                <td>{{autor.nome}}</td>
+                <td>{{autor.biografia}}</td>
+                <td><a routerLink="/autores/formulario/{{autor.id}}" class="btn btn-warning">Alterar</a></td>
             </tr>
         </tbody>
     </table>
 </div>
-
-
